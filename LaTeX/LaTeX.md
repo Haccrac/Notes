@@ -458,8 +458,19 @@ $\LaTeX$中使用超链接需要调用**hyperref**宏包
 ## 7.2 编写文档类和宏包
 **编写文档类**
 文档类的扩展名为.cls
-* \ProvidesClass{name} 表示文档类的命令，并且name需要与文档类文件名一致。
+* \NeedsTeXFormat{LaTeX2e}[YYYY/MM/DD] 文档类开头必须的命令，用以指明文档类所需的$\LaTeX$版本，可选参数为相应版本的日期，且必须严格按照格式书写。
+* \ProvidesClass{name}[YYYY/MM/DD description] 表示文档类的命令，并且name需要与文档类文件名一致,可选参数为文档类版本日期及对该文档类的描述。
 * \LoadClass{} 如果编写文档类时，某些命令在其他文档类中存在，则可使用该命令加载其他文档类以导入相应功能。
+* 初始设置：在文类文件的开始处需要定义一些后面程序中要用到的数据命令和条件控制命令，并预先设定条件的真假，它们将用于后面相关条件的判断，以确定程序的运行方向。
+  * \newcommand\name{} 表示预设命令name并且赋值为空
+  * \newif\if name 判断语句
+
+* 选项设置：条件判断后，符合条件后的选项设置
+  * \if 条件
+        ...
+    \else
+        ...
+    \fi 结束语
 
 **编写宏包**
 宏包的扩展名为.sty，在$\LaTeX$文档中使用命令\usepackage{}可以调用宏包。
@@ -472,6 +483,8 @@ $\LaTeX$中使用超链接需要调用**hyperref**宏包
 * \setcounter{name}{number} 将计数器name的值设置为number
 * \addtocounter{name}{number} 将计数器name 的值加上number
 * \stepcounter{name} 将计数器name值加一，并将下级计数器归零
+
+![counter set](figure/计数器设置.png)
 
 **计数器输出格式**
 计数器name的输出格式由\thename表示，修改格式方法为：
@@ -487,6 +500,9 @@ $\LaTeX$中使用超链接需要调用**hyperref**宏包
 ![counter](figure/计数器.png)
 
 ![counter](figure/计数器2.png)
+
+系统定义的secnumdepth计数器用于控制层次标题的排列深度，其默认值为0，即只对章标题排序，二章以下的个层次标题都不给出序号。
+  * setcounter{scenumdepth}{2} 将层次标题排列深度赋值为2，此时，章标题、节标题和小节标题都将给出序号。
 
 **定制命令和参数**
 ![标题前缀](figure/标题前缀.png)
