@@ -6,9 +6,15 @@
 * \newcommand{\name}{code} 定义新命令name
 * \newenvironment{name}{before}{after} 定义新环境
 * \DeclareOption{option}{code} 定义选项，如果出现该option则执行代码code
-* \ProcessOptions\relax 终止执行上述的选项，此两者一般成对出现
+* \DeclareOption*{%
+    \PassOptionsToClass{\CurrentOption}{article}%
+  } 将定义的选项传递给article文类
+* \ProcessOptions\relax 执行上述的定义
 
 # 最小文档
 文档必须包括四个内容：**\normalsize,\textwidth,\textheight,页数的规范**，称为最小文档。
 
 # 参数传递
+
+# 基本语句
+* 
